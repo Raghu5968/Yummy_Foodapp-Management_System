@@ -1,0 +1,77 @@
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+<div class="container bootstrap snippets bootdey">
+    <div >
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-info panel-shadow">
+                    <div class="panel-heading">
+                        <h3 class=" alert alert-info">
+                            <img class="img-circle img-thumbnail" src="{{request.user.foodappusers.pic.url}}">
+                            {{request.user}}
+                        </h3>
+                    </div>
+                    <div class="panel-body"> 
+                        <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Sno.</th>
+                                <th>Image</th>
+                                <th>Items</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in cart_items %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td><img src="/images/{{i.items.image}}" class="img-cart"></td>
+                                    <td><strong>{{i.items.itemname}}</strong></td>
+                                    <td>{{i.items.price}}</td>
+                                    
+                                    <td>
+                                        <!-- Quantity -->
+                                        <div class="d-flex mb-4" style="max-width: 70px">
+                                            <div class="form-outline">
+                                                <input id="form1" name="quantity"
+                                                    value="{{i.quanity}}" type="number"
+                                                    class="form-control" />
+                                                <label class="form-label" for="form1"></label>
+                                            </div>
+                                        </div>
+                                        <!-- Quantity -->
+
+                                    </td>
+                                    <td>{{i.items.price}}</td>
+                                    <td>
+                                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                            <a href="{% url 'remove_from_cart' i.id %}"
+                                                class="text-muted"><i class="fa-solid fa-trash"
+                                                    style="color: #fa1100;"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                
+                                <tr>
+                                    <td colspan="6">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-right"><strong><b>Total Price</b></strong></td>
+                                    <td>{{total_price}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+                <a href="menu" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Continue Shopping</a>
+                <a href="checkout" class="btn btn-primary pull-right">Next<span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+    </div>
+</div>

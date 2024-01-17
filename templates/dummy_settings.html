@@ -1,0 +1,67 @@
+<div class="container d-flex align-items-center justify-content-between">
+
+    <a href="" class="logo d-flex align-items-center me-auto me-lg-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        
+        <h1>Yummy<span>.</span></h1>
+        <i class="fa-solid fa-utensils fa-flip-horizontal"></i>
+    </a>
+
+    <nav id="navbar" class="navbar">
+        <ul>
+            <li><a href="logoutpage" class="btn btn-warning">logout</a></li>
+                   
+    </li>
+        </ul>
+
+    </nav><!-- .navbar -->
+
+    <!-- <a class="btn-book-a-table" href="orders">Orders</a> -->
+
+    <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+    <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+</div>
+<!-- end navbar -->
+
+</style>
+<div class="row">
+<div class="col-md-3">
+    <div class="card card-body">
+        <a href="{% url 'orders' %}" class="text-info"><b>Back to profile</b></a>
+        <hr>
+        <h3 style="text-align: center;">Account settings</h3>
+        <img class="profile-pic" src="{{request.user.foodappusers.profile_pic.url}}" alt="">
+       
+         <hr>
+        
+    </div>
+</div>
+<div class="col-md-9">
+    <div class="card card-body">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{form.as_p}}
+
+            <input type="submit" class="btn btn-warning" name="Update info" value="Update">
+        </form>
+
+    </div>
+</div>
+</div>
+<!-- def createOrder(request,pk):
+    OrderFormSet=inlineformset_factory(Foodappusers,Order,fields=('item','status'))
+    customer=Foodappusers.objects.get(id=pk)
+    formset=OrderFormSet(queryset=Order.objects.none(),instance=customer)
+    # form=OrderForm(initial={'customer':customer})
+    if request.method=='POST':
+        print(request.POST)
+        # form=OrderForm(request.POST)
+        formset=OrderFormSet(request.POST,instance=customer)
+        print(formset)
+        if formset.is_valid():
+            formset.save()
+            return redirect('admin_dashboard')
+    context={'formset':formset}
+    return render(request,'order_form.html',context) -->

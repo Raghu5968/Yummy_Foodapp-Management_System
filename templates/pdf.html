@@ -1,0 +1,213 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="static/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="static/css/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="static/css/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="static/css/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="static/css/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="static/css/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="static/css/vendor/style.css" rel="stylesheet">
+    <link href="static/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="static/css/checkout.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+
+
+</head>
+<div id="pt">
+    <div class="container mt-5">
+        <div class="alert alert-success alert-dismissible fade show" data-dismiss="alert" role="alert">
+            <div class="header">
+                <h5><strong>Thank You for the Payment</strong></h5><br>
+                CLick below to generate bill
+            </div>
+
+        </div>
+        <div>
+            <h1>Bill Details:</h1>
+        </div>
+        <div>
+            <table class="table">
+                <tr>
+                    <td style="font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:15px;">
+                        Invoice Number:
+                        {{foodappusers.id}}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:15px;">
+                        Invoice Date:
+                        {{Order.date_created}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+        <div>
+            <h2>Seller</h2>
+        </div>
+
+        <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
+
+            {% for s in seller %}
+            <tr>
+                <td style="font-family:Verdana, Geneva, sans-serif; font-weight:400; font-size:14px;">
+                    <b>Name</b>
+                </td>
+                <td>
+                    {{s.name}}
+                </td>
+            </tr>
+            <tr>
+                <td style="font-family:Verdana, Geneva, sans-serif; font-weight:400; font-size:14px;">
+                    <b>Address </b>
+                </td>
+                <td>
+                    {{s.address}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Phone</b>
+                </td>
+                <td>
+                    {{s.number}}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div>
+            <h2>Buyer</h2>
+        </div>
+
+        <table class="table" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="font-family:Verdana, Geneva, sans-serif; font-weight:400; font-size:14px;">
+                    <b>Name</b>
+                </td>
+                <td>
+                    {{request.user.username}}
+                </td>
+            </tr>
+            <tr>
+                <td style="font-family:Verdana, Geneva, sans-serif; font-weight:400; font-size:14px;">
+                    <b>Email Address </b>
+                </td>
+                <td>
+                    {{request.user.email}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Phone</b>
+                </td>
+                <td>
+                    {{request.user.foodappusers.number}}
+                </td>
+            </tr>
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td style="font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:13px; border-top:1px solid #333; border-bottom:1px solid #333; border-left:1px solid #333; border-right:1px solid #333;"
+                        width="34%" height="32" align="center">Product</td>
+                    <td style="font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:13px; border-top:1px solid #333; border-bottom:1px solid #333; border-right:1px solid #333;"
+                        width="30%" align="center">Quantity</td>
+                    <td style="font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:13px; border-top:1px solid #333; border-bottom:1px solid #333; border-right:1px solid #333;"
+                        width="30%" align="center">Amount</td>
+                </tr>
+                <tr>
+                    {% for i in cart_items %}
+                    <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px; border-bottom:1px solid #333; border-left:1px solid #333; border-right:1px solid #333;"
+                        height="32" align="center">
+                        {{i.items}}
+                    </td>
+                    <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px; border-bottom:1px solid #333; border-right:1px solid #333;"
+                        align="center">
+                        {{i.quantity}}
+                    </td>
+                    <td style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px; border-bottom:1px solid #333; border-right:1px solid #333;"
+                        align="center">
+                        {{i.total_price}}
+                    </td>
+                    {% endfor %}
+                </tr>
+                
+                <tr>
+                    <td style="font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:13px; border-top:1px solid #333; border-bottom:1px solid #333; border-left:1px solid #333; border-right:1px solid #333;"
+                        width="34%" height="32" align="center">Grand Total</td>
+                    <td style="font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:13px; border-top:1px solid #333; border-bottom:1px solid #333; border-right:1px solid #333;"
+                        width="30%" align="center" colspan="2">
+                        {{total_price}}
+                    </td>
+                </tr>
+
+            </table>
+            </td>
+            </tr>
+
+        </table>
+        <button onclick="myfun('pt')" class="btn btn-primary mt-3">Get Bill</button>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $('.alert').alert()
+    function myfun(pa) {
+        var bk = document.body.innerHTML;
+        var dv = document.getElementById(pa).innerHTML;
+        document.body.innerHTML = dv;
+        window.print();
+
+    }
+</script>
+
+<script src="static/css/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="static/css/aos/aos.js"></script>
+<script src="static/css/glightbox/js/glightbox.min.js"></script>
+<script src="static/css/purecounter/purecounter_vanilla.js"></script>
+<script src="static/css/swiper/swiper-bundle.min.js"></script>
+<script src="static/css/php-email-form/validate.js"></script>
+
+<script src="static/js/main.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+</html>

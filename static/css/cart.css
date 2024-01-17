@@ -1,0 +1,27 @@
+.img-cart {
+    display:block;
+    -webkit-box-align: center;
+    max-width: 90px;
+    height:90px;
+    margin-left: auto;
+    margin-right: auto;
+}
+table tr td{
+    border:1px solid #ffffff35;    
+}
+
+table tr th {
+    background:#eee;    
+}
+
+.panel-shadow {
+    box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
+}
+.img{
+    display:block;
+    max-width: 90px;
+    height:90px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}

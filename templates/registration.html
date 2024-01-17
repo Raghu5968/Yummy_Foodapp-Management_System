@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/Bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/cover.css' %}">
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+
+
+<body >
+  <div class="login-box">
+    <h1 class="text text-info ">Registration Form</h1>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="user-box">
+        <!-- <input type="text" name="username" required=""> -->
+        {{form.username}}
+        <label>Username</label>
+      </div>
+      <div class="user-box">
+        <!-- <input type="email" name="email" required=""> -->
+        {{form.email}}
+        <label>email</label>
+      </div>
+      <div class="user-box">
+        <!-- <input type="password" name="password" required=""> -->
+        {{form.password1}}
+        <label>password</label>
+      </div>
+      <div class="user-box">
+        <!-- <input type="password" name="password" required=""> -->
+        {{form.password2}}
+        <label>con password</label>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <div class="mt-4">
+      <div class="d-flex justify-content-center links">
+       <p class="text-info">Already have an account?</p>  <a href="{% url 'loginpage' %}" class="btn btn-outline-info btn-sm ml-2">Login</a>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  {% for message in messages %}
+
+  <h3 class="text-danger">{{message}}</h3>
+  {% endfor %}
+</body>
+
+</html>
